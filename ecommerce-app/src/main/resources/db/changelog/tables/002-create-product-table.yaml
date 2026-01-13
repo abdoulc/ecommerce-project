@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-product-table
+      author:  Abdoul Razak
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: varchar(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: price
+                  type: decimal(10,2)
+                  constraints:
+                    nullable: false
+
+              - column:
+                  name: published
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false

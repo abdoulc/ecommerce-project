@@ -2,3 +2,6 @@ databaseChangeLog:
   - include:
       file: tables/create-idempotency-table-01.yml
       relativeToChangelogFile: true
+  - include:
+      file: tables/002-create-product-table.yaml
+      relativeToChangelogFile: true

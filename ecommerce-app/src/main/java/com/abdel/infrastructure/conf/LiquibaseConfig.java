@@ -1,4 +1,4 @@
-package com.abdel.conf;
+package com.abdel.infrastructure.conf;
 
 import liquibase.integration.spring.SpringLiquibase;
 import org.springframework.beans.factory.annotation.Autowired;
