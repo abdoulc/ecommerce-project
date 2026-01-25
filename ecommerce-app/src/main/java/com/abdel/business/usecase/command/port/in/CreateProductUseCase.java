@@ -1,7 +1,8 @@
 package com.abdel.business.usecase.command.port.in;
 
-import com.abdel.business.domain.model.Product;
+import com.abdel.business.domain.valueobject.ProductId;
+import com.abdel.business.usecase.input.CreateProductInput;
 
 public interface CreateProductUseCase {
-    void createProduct(Product product);
+    ProductId create(CreateProductInput input);
 }

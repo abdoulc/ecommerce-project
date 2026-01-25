@@ -7,13 +7,12 @@ import com.abdel.infrastructure.persistence.entity.ProductEntity;
 public class ProductMapper {
 
     public static ProductEntity toEntity(Product product) {
-        return null;
-       /* return new ProductEntity(
+      return new ProductEntity(
                 product.getId().value(),
                 product.getName().value(),
                 product.getPrice().price(),
                 product.isPublished()
-        );*/
+        );
     }
 
     public static Product toDomain(ProductEntity entity) {
