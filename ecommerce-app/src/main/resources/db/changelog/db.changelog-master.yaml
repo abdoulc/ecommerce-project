@@ -5,3 +5,9 @@ databaseChangeLog:
   - include:
       file: tables/002-create-product-table.yaml
       relativeToChangelogFile: true
+  - include:
+      file:  tables/003-init-security.yml
+      relativeToChangelogFile: true
+  - include:
+      file: scripts/001-insert-roles.yaml
+      relativeToChangelogFile: true

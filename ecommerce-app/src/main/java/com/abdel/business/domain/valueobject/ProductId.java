@@ -11,6 +11,6 @@ public record ProductId(String value) {
     }
 
     public static ProductId newId() {
-        return new ProductId(UUID.randomUUID().toString());
+        return IdFactory.newId(ProductId::new);
     }
 }

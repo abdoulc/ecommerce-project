@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-roles
+      author: abdoul
+      preConditions:
+        - onFail: MARK_RAN
+        - tableExists:
+            tableName: roles
+        - not:
+            sqlCheck:
+              expectedResult: 1
+              sql: "SELECT COUNT(*) FROM roles WHERE name = 'ROLE_ADMIN'"
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  valueComputed: UUID()
+              - column:
+                  name: name
+                  value: ROLE_ADMIN
+
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  valueComputed: UUID()
+              - column:
+                  name: name
+                  value: ROLE_USER

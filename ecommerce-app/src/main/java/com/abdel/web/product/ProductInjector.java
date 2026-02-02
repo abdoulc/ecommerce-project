@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class ProductUseCaseProvider {
+public class ProductInjector {
     private final ProductRepository productRepository;
 
-    public ProductUseCaseProvider(ProductRepository productRepository) {
+    public ProductInjector(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
 

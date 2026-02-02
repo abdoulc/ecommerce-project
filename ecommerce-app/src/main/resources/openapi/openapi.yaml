@@ -9,3 +9,7 @@ servers:
 paths:
   /products:
     $ref: "./products.yaml#/paths/~1products"
+  /auth/register:
+    $ref: "./auth.yaml#/paths/~1auth~1register"
+  /auth/login:
+    $ref: "./auth.yaml#/paths/~1auth~1login"
