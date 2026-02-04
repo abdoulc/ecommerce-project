@@ -1,6 +1,7 @@
 package com.abdel.infrastructure.conf.security;
 
-import com.abdel.infrastructure.conf.security.jwt.CustomUserDetailsService;
+import com.abdel.infrastructure.auth.CustomUserDetailsService;
+import com.abdel.infrastructure.auth.TokenFilter;
 import com.abdel.infrastructure.conf.security.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -19,12 +20,12 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    private final JwtFilter jwtAuthFilter;
+    private final TokenFilter jwtAuthFilter;
 
     private final CustomUserDetailsService userDetailsService;
 
     @Autowired
-    public SecurityConfig(JwtFilter jwtAuthFilter, CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(TokenFilter jwtAuthFilter, CustomUserDetailsService userDetailsService) {
         this.jwtAuthFilter = jwtAuthFilter;
         this.userDetailsService = userDetailsService;
     }

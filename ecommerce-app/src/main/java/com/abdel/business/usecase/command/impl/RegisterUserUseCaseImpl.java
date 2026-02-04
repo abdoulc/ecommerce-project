@@ -6,17 +6,18 @@ import com.abdel.business.domain.valueobject.Email;
 import com.abdel.business.domain.valueobject.Password;
 import com.abdel.business.domain.valueobject.UserId;
 import com.abdel.business.usecase.command.port.in.RegisterUserUseCase;
+import com.abdel.business.usecase.command.port.out.PasswordHasher;
 import com.abdel.business.usecase.command.port.out.UserRepository;
 import com.abdel.business.usecase.input.RegisterUserInput;
 import com.abdel.business.usecase.query.port.out.RoleQueryPort;
-import com.abdel.infrastructure.conf.security.BCryptPasswordHasher;
+import com.abdel.infrastructure.auth.BCryptPasswordHasher;
 
 import java.util.Set;
 
 public class RegisterUserUseCaseImpl implements RegisterUserUseCase {
 
     private final UserRepository userRepository;
-    private final BCryptPasswordHasher passwordHasher;
+    private final PasswordHasher passwordHasher;
 
     private final RoleQueryPort roleQueryPort;
 

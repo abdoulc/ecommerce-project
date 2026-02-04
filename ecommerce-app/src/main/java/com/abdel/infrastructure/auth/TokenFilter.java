@@ -1,7 +1,7 @@
-package com.abdel.infrastructure.conf.security.jwt;
+package com.abdel.infrastructure.auth;
 
-import com.abdel.infrastructure.auth.CustomUserDetailsService;
-import com.abdel.infrastructure.auth.SecurityUser;
+import com.abdel.infrastructure.conf.security.jwt.JwtUtil;
+import com.abdel.infrastructure.mapper.UserMapper;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -17,10 +17,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @Component
-public class JwtFilter extends OncePerRequestFilter {
+public class TokenFilter extends OncePerRequestFilter {
 
     @Autowired
-    private JwtUtil jwtUtil;
+    private TokenUtil TokenUtil;
 
     @Autowired
     private CustomUserDetailsService userDetailsService;
@@ -35,12 +35,12 @@ public class JwtFilter extends OncePerRequestFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             jwt = authHeader.substring(7);
-            username = jwtUtil.extractUsername(jwt);
+            username = TokenUtil.extractUsername(jwt);
         }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
             SecurityUser userDetails = userDetailsService.loadUserByUsername(username);
-            if (jwtUtil.validateToken(jwt, userDetails)) {
+            if (TokenUtil.validateToken(jwt, UserMapper.securityUserToUserView(userDetails))) {
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
