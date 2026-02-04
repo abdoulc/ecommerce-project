@@ -1,4 +1,4 @@
-package com.abdel.infrastructure.conf.security;
+package com.abdel.infrastructure.auth;
 
 import com.abdel.business.usecase.command.port.out.PasswordHasher;
 import org.springframework.security.crypto.password.PasswordEncoder;
