@@ -2,7 +2,6 @@ package com.abdel.infrastructure.conf.security;
 
 import com.abdel.infrastructure.auth.CustomUserDetailsService;
 import com.abdel.infrastructure.auth.TokenFilter;
-import com.abdel.infrastructure.conf.security.jwt.JwtFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
