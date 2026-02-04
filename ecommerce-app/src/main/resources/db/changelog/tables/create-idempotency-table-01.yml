@@ -1,0 +1,50 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-idempotency-table
+      author: Abdoul Razak
+      changes:
+        - createTable:
+            tableName: idempotency_records
+            columns:
+              - column:
+                  name: id
+                  type: CHAR(36)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: idempotency_key
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: operation
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: VARCHAR(50)
+                  defaultValue: "IN_PROGRESS"
+                  constraints:
+                    nullable: false
+              - column:
+                  name: request_payload
+                  type: TEXT
+              - column:
+                  name: request_hash
+                  type: VARCHAR(255)
+              - column:
+                  name: response_payload
+                  type: TEXT
+              - column:
+                  name: created_at
+                  type: DATETIME(6)
+                  defaultValueComputed: CURRENT_TIMESTAMP(6)
+                  constraints:
+                    nullable: false
+              # expiresAt
+              - column:
+                  name: expires_at
+                  type: DATETIME(6)
