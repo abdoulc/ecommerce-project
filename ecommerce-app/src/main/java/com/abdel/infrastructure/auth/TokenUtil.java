@@ -17,11 +17,12 @@ import java.util.concurrent.TimeUnit;
 @Component
 public class TokenUtil implements TokenPort {
     private final String SECRET_KEY = "D7fR9x2vL6qZ8mY1nP5sB3wV0kC4eT9H";
+    Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+
     @Override
     public String generateToken(UserView user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("authorities", user.getAuthorities());
-        Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(user.getUsername().value())
@@ -33,7 +34,9 @@ public class TokenUtil implements TokenPort {
 
     @Override
     public String extractUsername(String token) {
-        return Jwts.parser().setSigningKey(SECRET_KEY)
+        return Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
@@ -46,7 +49,9 @@ public class TokenUtil implements TokenPort {
     }
 
     private boolean isTokenExpired(String token) {
-        Date expiration = Jwts.parser().setSigningKey(SECRET_KEY)
+        Date expiration = Jwts.parserBuilder()
+                .setSigningKey(key)
+                .build()
                 .parseClaimsJws(token)
                 .getBody()
                 .getExpiration();
