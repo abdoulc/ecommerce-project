@@ -9,15 +9,15 @@ import java.util.UUID;
 
 @Entity
 @Table(
-        name = "idempotency_records",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"idempotencyKey", "operation"})
+        name = "idempotency",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"idempotency_key", "operation"})
 )
 @Data
 public class IdempotencyEntity{
 
     @Id
-    @GeneratedValue
-    private UUID id;
+    @Column(name = "id", nullable = false, length = 36)
+    private String id;
 
     @Column(nullable = false)
     private String idempotencyKey;
