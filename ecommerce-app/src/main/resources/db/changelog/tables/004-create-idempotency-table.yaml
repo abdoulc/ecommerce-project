@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Abdoul Razak
       changes:
         - createTable:
-            tableName: idempotency_records
+            tableName: idempotency
             columns:
               - column:
                   name: id
@@ -17,7 +17,6 @@ databaseChangeLog:
                   type: VARCHAR(255)
                   constraints:
                     nullable: false
-                    unique: true
               - column:
                   name: operation
                   type: VARCHAR(255)
@@ -26,12 +25,8 @@ databaseChangeLog:
               - column:
                   name: status
                   type: VARCHAR(50)
-                  defaultValue: "IN_PROGRESS"
                   constraints:
                     nullable: false
-              - column:
-                  name: request_payload
-                  type: TEXT
               - column:
                   name: request_hash
                   type: VARCHAR(255)
@@ -41,10 +36,13 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: DATETIME(6)
-                  defaultValueComputed: CURRENT_TIMESTAMP(6)
                   constraints:
                     nullable: false
-              # expiresAt
               - column:
                   name: expires_at
                   type: DATETIME(6)
+
+        - addUniqueConstraint:
+            tableName: idempotency_records
+            columnNames: idempotency_key, operation
+            constraintName: uk_idempotency_key_operation

@@ -10,7 +10,7 @@ import com.abdel.business.usecase.command.port.out.PasswordHasher;
 import com.abdel.business.usecase.command.port.out.UserRepository;
 import com.abdel.business.usecase.input.RegisterUserInput;
 import com.abdel.business.usecase.query.port.out.RoleQueryPort;
-import com.abdel.infrastructure.auth.BCryptPasswordHasher;
+import com.abdel.infrastructure.adapter.BCryptPasswordHasher;
 
 import java.util.Set;
 

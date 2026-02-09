@@ -1,5 +1,6 @@
-package com.abdel.core;
+package com.abdel.infrastructure.persistence.entity;
 
+import com.abdel.core.IdempotencyStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -12,7 +13,7 @@ import java.util.UUID;
         uniqueConstraints = @UniqueConstraint(columnNames = {"idempotencyKey", "operation"})
 )
 @Data
-public class IdempotencyRecord {
+public class IdempotencyEntity{
 
     @Id
     @GeneratedValue

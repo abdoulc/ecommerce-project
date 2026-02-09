@@ -38,7 +38,7 @@ The project follows a **Hexagonal Architecture** pattern with the following laye
 - `src/main/java/com/abdel/business/domain`: Domain models and value objects.
 - `src/main/java/com/abdel/business/usecase`: Application use cases and ports.
 - `src/main/java/com/abdel/infrastructure`: Security, persistence, and configuration.
-- `src/main/java/com/abdel/infrastructure/web`: REST controllers for handling API requests.
+- `src/main/java/com/abdel/web`: REST controllers for handling API requests.
 
 ---
 

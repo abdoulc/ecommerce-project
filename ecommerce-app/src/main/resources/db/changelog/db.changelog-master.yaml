@@ -1,6 +1,6 @@
 databaseChangeLog:
   - include:
-      file: tables/create-idempotency-table-01.yml
+      file: tables/004-create-idempotency-table.yaml
       relativeToChangelogFile: true
   - include:
       file: tables/002-create-product-table.yaml
@@ -10,4 +10,28 @@ databaseChangeLog:
       relativeToChangelogFile: true
   - include:
       file: scripts/001-insert-roles.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: tables/005-create-inventory-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: tables/006-create-orders-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: tables/007-create-order-items-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: tables/008-create-payments-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: tables/009-create-shipments-table.yaml
+      relativeToChangelogFile: true
+
+  - include:
+      file: tables/010-add-foreign-keys.yaml
       relativeToChangelogFile: true
