@@ -1,5 +1,6 @@
 package com.abdel.infrastructure.adapter;
 
+import com.abdel.business.domain.valueobject.IdempotencyId;
 import com.abdel.business.usecase.command.port.out.IdempotencyPort;
 import com.abdel.core.IdempotencyRecord;
 import com.abdel.exceptions.IdempotencyConflictException;
@@ -102,6 +103,7 @@ public class IdempotencyDatabaseAdapter implements IdempotencyPort {
             Duration ttl
     ) {
         IdempotencyEntity entity = new IdempotencyEntity();
+        entity.setId(IdempotencyId.newId().value());
         entity.setIdempotencyKey(key);
         entity.setOperation(operation);
         entity.setRequestHash(requestHash);
