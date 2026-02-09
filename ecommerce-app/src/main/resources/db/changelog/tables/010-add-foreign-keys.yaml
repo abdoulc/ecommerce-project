@@ -1,0 +1,39 @@
+databaseChangeLog:
+  - changeSet:
+      id: 010-foreign-keys
+      author:  Abdoul Razak
+      changes:
+        - addForeignKeyConstraint:
+            constraintName: fk_inventory_products
+            baseTableName: inventory
+            baseColumnNames: product_id
+            referencedTableName: products
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_order_items_orders
+            baseTableName: order_items
+            baseColumnNames: order_id
+            referencedTableName: orders
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_order_items_products
+            baseTableName: order_items
+            baseColumnNames: product_id
+            referencedTableName: products
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_payments_orders
+            baseTableName: payments
+            baseColumnNames: order_id
+            referencedTableName: orders
+            referencedColumnNames: id
+
+        - addForeignKeyConstraint:
+            constraintName: fk_shipments_orders
+            baseTableName: shipments
+            baseColumnNames: order_id
+            referencedTableName: orders
+            referencedColumnNames: id
