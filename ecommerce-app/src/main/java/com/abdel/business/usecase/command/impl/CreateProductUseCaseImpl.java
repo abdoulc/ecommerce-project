@@ -1,6 +1,7 @@
 package com.abdel.business.usecase.command.impl;
 
 import com.abdel.business.domain.model.Product;
+import com.abdel.business.domain.model.enums.Currency;
 import com.abdel.business.domain.valueobject.Money;
 import com.abdel.business.domain.valueobject.ProductId;
 import com.abdel.business.domain.valueobject.ProductName;
@@ -36,11 +37,12 @@ public class CreateProductUseCaseImpl implements CreateProductUseCase {
     }
 
     private ProductId saveProduct(CreateProductInput productInput) {
+
         ProductId id = ProductId.newId();
         Product product = Product.create(
                 id,
                 new ProductName(productInput.name()),
-                new Money(productInput.price())
+                new Money(productInput.price(), Currency.EUR)
         );
         productRepository.save(product);
         return id;

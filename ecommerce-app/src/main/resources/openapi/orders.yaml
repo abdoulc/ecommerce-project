@@ -1,0 +1,118 @@
+paths:
+  /orders:
+    post:
+      summary: Create a new order
+      operationId: createOrder
+      tags:
+        - Orders
+
+      parameters:
+        - name: Idempotency-Key
+          in: header
+          required: true
+          description: Unique key to ensure idempotent order creation
+          schema:
+            type: string
+            example: abc123
+
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateOrderRequest'
+            example:
+              items:
+                - productId: P1
+                  quantity: 2
+                - productId: P2
+                  quantity: 1
+              addressId: ADDR1
+
+      responses:
+        '201':
+          description: Order successfully created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+              example:
+                orderId: ORD-10001
+                status: PENDING
+                totalAmount: 150.00
+                currency: USD
+
+        '400':
+          description: Invalid request
+
+        '401':
+          description: Unauthorized (Invalid or missing JWT)
+
+        '409':
+          description: Duplicate idempotency key
+
+        '500':
+          description: Internal server error
+
+      security:
+        - bearerAuth: []
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+
+    CreateOrderRequest:
+      type: object
+      required:
+        - items
+        - addressId
+      properties:
+        items:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/OrderItemRequest'
+        addressId:
+          type: string
+          example: ADDR1
+
+    OrderItemRequest:
+      type: object
+      required:
+        - productId
+        - quantity
+      properties:
+        productId:
+          type: string
+          example: P1
+        quantity:
+          type: integer
+          minimum: 1
+          example: 2
+        price:
+          type: number
+          format: decimal
+          minimum: 0
+          example: 19.99
+
+    OrderResponse:
+      type: object
+      properties:
+        orderId:
+          type: string
+          example: ORD-10001
+        status:
+          type: string
+          example: PENDING
+        totalAmount:
+          type: number
+          format: decimal
+          example: 150.00
+        currency:
+          type: string
+          example: USD

@@ -6,10 +6,29 @@ info:
 servers:
   - url: /api
 
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: "JWT Authorization header using the Bearer scheme. Example: 'Bearer {token}'"
+
+
+security:
+  - bearerAuth: []
+
+
 paths:
   /products:
     $ref: "./products.yaml#/paths/~1products"
+    security:
+      - bearerAuth: [ ]
   /auth/register:
     $ref: "./auth.yaml#/paths/~1auth~1register"
+    security: []
   /auth/login:
     $ref: "./auth.yaml#/paths/~1auth~1login"
+    security: []
+  /orders:
+    $ref: "./orders.yaml#/paths/~1orders"

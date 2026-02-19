@@ -35,3 +35,6 @@ databaseChangeLog:
   - include:
       file: tables/010-add-foreign-keys.yaml
       relativeToChangelogFile: true
+  - include:
+      file: tables/011-create-inventory-reservation-table.yaml
+      relativeToChangelogFile: true
