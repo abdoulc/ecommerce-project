@@ -1,51 +1,49 @@
 databaseChangeLog:
   - changeSet:
-      id: 008-payments-table
+      id: 011-inventory-reservation-table
       author:  Abdoul Razak
       changes:
         - createTable:
-            tableName: payments
+            tableName: inventory_reservation
             columns:
               - column:
                   name: id
-                  type: VARCHAR(36)
+                  type: varchar(36)
                   constraints:
                     primaryKey: true
+                    nullable: false
+
               - column:
                   name: order_id
-                  type: VARCHAR(36)
+                  type: varchar(36)
                   constraints:
                     nullable: false
+
               - column:
-                  name: provider
-                  type: VARCHAR(50)
+                  name: product_id
+                  type: varchar(36)
                   constraints:
                     nullable: false
+
               - column:
-                  name: provider_reference
-                  type: VARCHAR(255)
+                  name: quantity
+                  type: int
                   constraints:
                     nullable: false
-                    unique: true
+
               - column:
                   name: status
-                  type: VARCHAR(50)
+                  type: varchar(50)
                   constraints:
                     nullable: false
+
               - column:
-                  name: amount
-                  type: DECIMAL(12,2)
+                  name: expiry_time
+                  type: timestamp
                   constraints:
                     nullable: false
-              - column:
-                  name: currency
-                  type: VARCHAR(10)
-                  constraints:
-                    nullable: false
+
               - column:
                   name: created_at
-                  type: TIMESTAMP
+                  type: timestamp
                   defaultValueComputed: CURRENT_TIMESTAMP
-              - column:
-                  name: completed_at
-                  type: TIMESTAMP

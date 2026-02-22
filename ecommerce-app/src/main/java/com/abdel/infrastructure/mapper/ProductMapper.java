@@ -10,7 +10,7 @@ public class ProductMapper {
       return new ProductEntity(
                 product.getId().value(),
                 product.getName().value(),
-                product.getPrice().price(),
+                product.getPrice().amount(),
                 product.isPublished()
         );
     }

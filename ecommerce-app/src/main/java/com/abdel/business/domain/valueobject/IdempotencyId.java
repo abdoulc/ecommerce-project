@@ -4,7 +4,7 @@ public record IdempotencyId(String value) {
 
     public IdempotencyId {
         if (value == null || value.isBlank()) {
-            throw new IllegalArgumentException("ProductId cannot be null or blank");
+            throw new IllegalArgumentException("IdempotencyId cannot be null or blank");
         }
     }
 
