@@ -38,6 +38,8 @@ public class AppScheduler {
             r.setStatus(ReservationStatus.EXPIRED);
             inventoryRepository.releaseInventory(new ProductId(r.getProductId()),new Quantity(r.getQuantity()));
             reservationRepository.save(r);
+            //cancelOrder(r.getOrderId());
+            //markPaymentExpired(r.getOrderId());
         }
     }
 

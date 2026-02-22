@@ -43,6 +43,6 @@ databaseChangeLog:
                   type: DATETIME(6)
 
         - addUniqueConstraint:
-            tableName: idempotency_records
+            tableName: idempotency
             columnNames: idempotency_key, operation
             constraintName: uk_idempotency_key_operation

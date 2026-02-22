@@ -1,6 +1,9 @@
 package com.abdel.infrastructure.persistence.repository.impl;
 
 import com.abdel.business.domain.model.Order;
+import com.abdel.business.domain.model.enums.Currency;
+import com.abdel.business.domain.valueobject.Money;
+import com.abdel.business.domain.valueobject.OrderId;
 import com.abdel.business.usecase.command.port.out.OrderRepository;
 import com.abdel.infrastructure.persistence.entity.OrderEntity;
 import com.abdel.infrastructure.persistence.repository.SpringDataOrderRepository;
@@ -23,5 +26,16 @@ public class JpaOrderRepository implements OrderRepository {
                 order.getTotalAmount().currency().name()
         );
         springDataOrderRepository.save(orderEntity);
+    }
+
+    @Override
+    public Order getById(OrderId orderId) {
+        OrderEntity entity = springDataOrderRepository.findById(orderId.value()).orElse(null);
+        if (entity == null) return null;
+        return new Order(
+                new OrderId(entity.getId()),
+                entity.getStatus(),
+                new Money(entity.getTotalAmount(), Currency.valueOf(entity.getCurrency()))
+        );
     }
 }
