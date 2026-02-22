@@ -1,6 +1,6 @@
 package com.abdel.infrastructure.persistence.entity;
 
-import com.abdel.core.IdempotencyStatus;
+import com.abdel.business.domain.model.IdempotencyStatus;
 import jakarta.persistence.*;
 import lombok.Data;
 

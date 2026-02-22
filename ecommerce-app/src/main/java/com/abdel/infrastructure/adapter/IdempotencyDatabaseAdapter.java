@@ -2,9 +2,9 @@ package com.abdel.infrastructure.adapter;
 
 import com.abdel.business.domain.valueobject.IdempotencyId;
 import com.abdel.business.usecase.command.port.out.IdempotencyPort;
-import com.abdel.core.IdempotencyRecord;
-import com.abdel.exceptions.IdempotencyConflictException;
-import com.abdel.exceptions.IdempotencyInProgressException;
+
+import com.abdel.infrastructure.exception.IdempotencyConflictException;
+import com.abdel.infrastructure.exception.IdempotencyInProgressException;
 import com.abdel.infrastructure.persistence.entity.IdempotencyEntity;
 import com.abdel.infrastructure.persistence.repository.SpringDataIdempotencyRepository;
 import com.abdel.infrastructure.util.RequestHashUtil;
@@ -18,7 +18,8 @@ import java.time.Instant;
 import java.util.Optional;
 import java.util.function.Supplier;
 
-import static com.abdel.core.IdempotencyStatus.*;
+import static com.abdel.business.domain.model.IdempotencyStatus.*;
+
 
 @Component
 public class IdempotencyDatabaseAdapter implements IdempotencyPort {
@@ -84,7 +85,7 @@ public class IdempotencyDatabaseAdapter implements IdempotencyPort {
         }
 
         return switch (entity.getStatus()) {
-            case SUCCESS -> com.abdel.util.SerializationUtil.deserialize(
+            case SUCCESS -> SerializationUtil.deserialize(
                     entity.getResponsePayload(), responseType
             );
             case FAILED -> throw new IllegalStateException(
